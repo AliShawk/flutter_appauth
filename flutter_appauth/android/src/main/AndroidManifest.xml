@@ -1,3 +1,29 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="io.crossingthestreams.flutterappauth">
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application>
+        <activity android:name=".appauth.AuthorizationManagementActivity"
+            android:exported="false"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboard|keyboardHidden"
+            android:theme="@style/Theme.AppCompat.Translucent.NoTitleBar"
+            android:launchMode="singleTask" />
+
+        <activity android:name=".appauth.RedirectUriReceiverActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="${appAuthRedirectScheme}"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
 </manifest>
